@@ -8,6 +8,10 @@ def encrypt(plaintext, seed):
     keystream = generate_keystream(seed, len(plaintext))
     return bytes([p ^ k for p, k in zip(plaintext.encode(), keystream)])
 
+def usopp_cipher(flag, secret_seed):
+    ciphertext = encrypt(flag, secret_seed)
+    return ciphertext
+
 def decrypt(ciphertext):
     cipherbytes = bytes.fromhex(ciphertext)
     for seed in range(100000):  # Intentar semillas del 0 al 99999
@@ -18,6 +22,6 @@ def decrypt(ciphertext):
             print(f"Texto descifrado: {plaintext.decode()}")
             break
         
-def usopp_cipher(flag, secret_seed):
-    ciphertext = encrypt(flag, secret_seed)
-    return ciphertext
+if __name__ == "__main__":
+    cypher_flag = "a77742694e4b578d4d3c6c3887cfdc2f1e6a5f619b4d11d6154c25e846acc58cec1c51da6a"
+    decrypt(cypher_flag)
